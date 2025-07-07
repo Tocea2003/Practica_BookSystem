@@ -412,7 +412,7 @@ const editBook = (book: Book & { authorName: string }) => {
     price: book.price,
     description: book.description,
     publisherId: book.publisherId || null,
-    categoryIds: book.categories?.map((c) => c.id) || [],
+    categoryIds: book.categories?.map((c: { id: number }) => c.id) || [],
   };
   showAddDialog.value = true;
 };
@@ -469,7 +469,10 @@ const saveBook = async () => {
       pages: bookForm.value.pages,
       price: bookForm.value.price,
       description: bookForm.value.description,
-      publisherId: bookForm.value.publisherId,
+      publisherId:
+        bookForm.value.publisherId !== null
+          ? bookForm.value.publisherId
+          : undefined,
       categoryIds: bookForm.value.categoryIds,
     };
 

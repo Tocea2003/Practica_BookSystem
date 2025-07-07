@@ -109,7 +109,10 @@ namespace Backend.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAuthor(int id)
         {
-            var author = await _context.Authors.Include(a => a.Books).FirstOrDefaultAsync(a => a.Id == id);
+            var author = await _context.Authors
+                .Include(a => a.Books)
+                .Include(a => a.Reviews)
+                .FirstOrDefaultAsync(a => a.Id == id);
 
             if (author == null)
             {
@@ -121,10 +124,16 @@ namespace Backend.Controllers
                 return BadRequest("Nu se poate șterge autorul. Are cărți asociate.");
             }
 
+            if (author.Reviews.Any())
+            {
+                return BadRequest("Nu se poate șterge autorul. Are recenzii asociate.");
+            }
+
             _context.Authors.Remove(author);
             await _context.SaveChangesAsync();
 
             return NoContent();
+            
         }
     }
 }

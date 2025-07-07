@@ -381,3 +381,21 @@ export const useLibraryStore = defineStore("library", () => {
     initialize,
   };
 });
+
+// Re-export types for convenience
+export type {
+  Author,
+  Book,
+  Category,
+  Publisher,
+  User,
+  Review,
+  BookReservation,
+  CreateAuthorDto,
+  CreateBookDto,
+  CreateCategoryDto,
+  CreatePublisherDto,
+  CreateUserDto,
+  CreateReviewDto,
+  CreateBookReservationDto,
+} from "../services/api";

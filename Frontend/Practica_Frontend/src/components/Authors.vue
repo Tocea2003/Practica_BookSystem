@@ -218,7 +218,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useLibraryStore, type Author } from "../stores/library";
+import { useLibraryStore, type Author, type Book } from "../stores/library";
 import { useToast } from "primevue/usetoast";
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
